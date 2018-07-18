@@ -13,6 +13,9 @@ val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % "3.8.0"
 val logback = "ch.qos.logback" % "logback-classic" % "1.2.3" % "test"
 val javaxMail = "javax.mail" % "javax.mail-api" % "1.6.1"
 val mailin = "com.sendinblue" % "sendinblue" % "2.0"
+val enumero = "io.buildo" %% "enumero" % "1.3.0"
+val akkaPersistence = "com.typesafe.akka" %% "akka-persistence" % "2.5.9"
+val levelDb = "org.fusesource.leveldbjni"   % "leveldbjni-all"   % "1.8"
 
 val commonSettings = Seq(
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
@@ -81,6 +84,9 @@ lazy val mailo = (project in file(".")).
       logback,
       javaxMail,
       mailin,
+      enumero,
+      akkaPersistence,
+      levelDb
     )
   )
 

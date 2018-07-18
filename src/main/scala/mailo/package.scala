@@ -20,7 +20,8 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class Mailo(
   mailData: MailData,
-  mailClient: MailClient
+  mailClient: MailClient,
+  deliverySemantic: DeliverySemantic = DeliverySemantic.AtMostOnce
 )(
   implicit
   ec: ExecutionContext,

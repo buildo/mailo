@@ -2,6 +2,11 @@ package mailo
 
 import akka.http.scaladsl.model.ContentType
 
+@enum trait DeliverySemantic {
+  object AtMostOnce
+  object AtLeastOnce
+}
+
 case class Attachment(
   name: String,
   `type`: ContentType,
