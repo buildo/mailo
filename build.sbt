@@ -1,5 +1,10 @@
+val akkaVersion = "2.5.14"
+
 val scalaTest = "org.scalatest" %% "scalatest" % "3.0.4" % "test"
-val akkaHttp = "com.typesafe.akka" %% "akka-http" % "10.0.3"
+val akkaStream = "com.typesafe.akka" %% "akka-stream" % akkaVersion
+val akkaHttp = "com.typesafe.akka" %% "akka-http" % "10.1.3"
+val akkaPersistence = "com.typesafe.akka" %% "akka-persistence" % akkaVersion
+val akkaPersistenceQuery = "com.typesafe.akka" %% "akka-persistence-query" % akkaVersion
 val s3 =  "com.github.seratch" %% "awscala" % "0.5.+"
 val catsCore = "org.typelevel" %% "cats-core" % "1.0.1"
 val alleyCatsCore = "org.typelevel" %% "alleycats-core" % "1.0.1"
@@ -14,7 +19,6 @@ val logback = "ch.qos.logback" % "logback-classic" % "1.2.3" % "test"
 val javaxMail = "javax.mail" % "javax.mail-api" % "1.6.1"
 val mailin = "com.sendinblue" % "sendinblue" % "2.0"
 val enumero = "io.buildo" %% "enumero" % "1.3.0"
-val akkaPersistence = "com.typesafe.akka" %% "akka-persistence" % "2.5.9"
 val levelDb = "org.fusesource.leveldbjni"   % "leveldbjni-all"   % "1.8"
 
 val commonSettings = Seq(
@@ -22,7 +26,6 @@ val commonSettings = Seq(
   bintrayOrganization := Some("buildo"),
   organization  := "io.buildo",
   scalaVersion  := "2.12.4",
-  crossScalaVersions := Seq("2.11.12", "2.12.4"),
   releaseEarlyWith := BintrayPublisher,
   releaseEarlyNoGpg := true,
   releaseEarlyEnableSyncToMaven := false,
@@ -61,6 +64,7 @@ val commonSettings = Seq(
     Resolver.bintrayRepo("buildo", "maven"),
     "Typesafe Releases" at "http://repo.typesafe.com/typesafe/maven-releases/"
   ),
+  addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
   fork in run := true
 )
 
@@ -70,7 +74,10 @@ lazy val mailo = (project in file(".")).
     name := "mailo",
     libraryDependencies ++= Seq(
       scalaTest,
+      akkaStream,
       akkaHttp,
+      akkaPersistence,
+      akkaPersistenceQuery,
       s3,
       catsCore,
       alleyCatsCore,
@@ -85,7 +92,6 @@ lazy val mailo = (project in file(".")).
       javaxMail,
       mailin,
       enumero,
-      akkaPersistence,
       levelDb
     )
   )
