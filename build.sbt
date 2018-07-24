@@ -84,6 +84,7 @@ lazy val mailo = (project in file(".")).
     )
   )
 
+
 mappings in (Compile, packageBin) ~= { _.filter { n =>
   !((n._1.getName.endsWith(".conf")) || n._1.getName.endsWith(".conf.example")) }
 }
